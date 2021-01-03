@@ -7,4 +7,6 @@ find_package(PkgConfig)
 
 pkg_check_modules(GTKMM gtkmm-3.0)
 
-add_subdirectory(src)
+add_subdirectory(src/graphical)
+add_subdirectory(src/sample_server)
+add_subdirectory(src/sample_client)
