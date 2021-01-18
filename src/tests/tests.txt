@@ -1,0 +1,11 @@
+try
+battleship; hor; coord_i;0; coord_j;0;
+cruiser; hor; coord_i;6; coord_j;1;
+cruiser; vert; coord_i;3; coord_j;6;
+destroyer; vert; coord_i;2; coord_j;1;
+destroyer; hor; coord_i;1; coord_j;8;
+destroyer; hor; coord_i;8; coord_j;7;
+submarine; hor; coord_i;2; coord_j;4;
+submarine; hor; coord_i;4; coord_j;3;
+submarine; vert; coord_i;8; coord_j;2;
+submarine; vert; coord_i;8; coord_j;4;

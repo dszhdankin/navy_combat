@@ -12,8 +12,9 @@
 #include <fstream>
 #include <thread>
 #include <functional>
+#include "Server.h"
 
-std::ofstream log("log.txt");
+std::ofstream lg("log.txt");
 std::atomic<bool> shut{false};
 
 void communicate(int fd) {
@@ -31,12 +32,12 @@ void communicate(int fd) {
         int size = recv(fd, buf, 15, 0);
         if (size < 0) {
             close(fd);
-            log << strerror(errno) << std::endl;
+            lg << strerror(errno) << std::endl;
             return;
         }
         buf[14] = '\0';
-        log << size << std::endl;
-        log << buf << std::endl;
+        lg << size << std::endl;
+        lg << buf << std::endl;
         send(fd, messages[rand() % 4], 30, 0);
     }
 
@@ -45,7 +46,7 @@ void communicate(int fd) {
 }
 
 int main() {
-    int fd = 0;
+    /*int fd = 0;
 
     sockaddr_in addr;
 
@@ -57,7 +58,7 @@ int main() {
     }
     memset(&addr, 0, sizeof(addr));
     addr.sin_family = AF_INET;
-    addr.sin_port = 5000;
+    addr.sin_port = htons(30000);
     addr.sin_addr.s_addr = INADDR_ANY;
 
     if (bind(fd, (sockaddr *) &addr, sizeof(addr)) < 0) {
@@ -66,7 +67,9 @@ int main() {
     }
     listen(fd, 5);
 
-    int client_fd = accept(fd, NULL, NULL);
+    sockaddr_in client_addr;
+    socklen_t sin_size=sizeof(struct sockaddr_in);
+    int client_fd = accept(fd, (sockaddr *) &client_addr, &sin_size);
     if (client_fd < 0) {
         std::cerr << strerror(errno) << "\n";
         return -3;
@@ -83,7 +86,28 @@ int main() {
     communication_thread.join();
 
     close(fd);
-    log.close();
+    lg.close();*/
+
+
+
+
+
+    Server server;
+
+    std::string str;
+
+    while (true) {
+        getline(std::cin, str);
+
+        if (str == "start")
+            server.start(8080, 10, 900, 200, 2000);
+        else if (str == "shutdown")
+            server.shutdown();
+        else
+            break;
+    }
+
+
     return 0;
 }
 
